@@ -11,13 +11,13 @@
 
     - name: Pull Docker Image
       docker_image:
-        name: Appleco
+        name: appleco
         source: pull
 
     - name: Start Docker Service
       docker_container:
         name: edureka_cert
-        image: Appleco
+        image: appleco
         ports:
           - "80:80"
         volumes:
