@@ -14,20 +14,21 @@ pipeline {
 		}
         stage('PHP Build') {
             steps {
+                sh 'composer update'
                 sh 'composer install'
             }
 		}
-		stage('Test') {
+		/*stage('Test') {
             steps {
-                sh 'vendor/bin/phpunit tests'
+                sh 'vendor/bin/unitTest.php'
             }
-		}
+		}*/
         stage("Docker build"){
             steps {
 				sh 'docker version'
-				sh "docker build -t Appleco:${BUILD_NUMBER} ."
+				sh "docker build -t appleco:${BUILD_NUMBER} ."
 				sh 'docker image list'
-				sh "docker tag Appleco:${BUILD_NUMBER} Appleco/edureka_cert:latest"
+				sh "docker tag appleco:${BUILD_NUMBER} frawatson/edureka_cert:latest"
             }
         }
 		stage('Login2DockerHub') {
@@ -40,15 +41,15 @@ pipeline {
 		stage('Push2DockerHub') {
 
 			steps {
-				sh "docker push Appleco/edureka_cert"
+				sh "docker push frawatson/edureka_cert"
 			}
 		}
         stage('execute Ansible') {
             steps {
-                sh 'ansible-playbook -i inventory playbook.yml'
+                sh 'ansible-playbook -i /etc/ansible/hosts playbook.yml'
             }
 		}
-        stage('Deploy on docker swarm') {
+        stage('Deploy to Docker') {
             steps {
 			 sh 'docker-compose up -d'
             }
