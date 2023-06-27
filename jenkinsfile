@@ -1,0 +1,57 @@
+pipeline {
+    agent { label 'MvnJenkinSlave' }
+
+	environment {	
+		DOCKERHUB_CREDENTIALS=credentials('dockerloginid')
+	} 
+    
+    stages {
+        stage('SCM Checkout') {
+            steps {
+                // Get some code from a GitHub repository
+                git 'https://github.com/Frawatson/projCert.git'
+            }
+		}
+        stage('PHP Build') {
+            steps {
+                sh 'composer install'
+            }
+		}
+		stage('Test') {
+            steps {
+                sh 'vendor/bin/phpunit tests'
+            }
+		}
+        stage("Docker build"){
+            steps {
+				sh 'docker version'
+				sh "docker build -t Appleco:${BUILD_NUMBER} ."
+				sh 'docker image list'
+				sh "docker tag Appleco:${BUILD_NUMBER} Appleco/edureka_cert:latest"
+            }
+        }
+		stage('Login2DockerHub') {
+
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
+        
+		stage('Push2DockerHub') {
+
+			steps {
+				sh "docker push Appleco/edureka_cert"
+			}
+		}
+        stage('execute Ansible') {
+            steps {
+                sh 'ansible-playbook -i inventory playbook.yml'
+            }
+		}
+        stage('Deploy to Docker') {
+            steps {
+			 sh 'docker-compose up -d'
+            }
+	    }
+    }
+}

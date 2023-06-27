@@ -1,0 +1,25 @@
+---
+- name: Deploy PHP Application
+  hosts: testserver
+  become: true
+
+  tasks:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Pull Docker Image
+      docker_image:
+        name: Appleco
+        source: pull
+
+    - name: Start Docker Service
+      docker_container:
+        name: edureka_cert
+        image: Appleco
+        ports:
+          - "80:80"
+        volumes:
+          - /path/to/app:/var/www/html
+        restart_policy: always
