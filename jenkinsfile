@@ -9,7 +9,7 @@ pipeline {
         stage('SCM Checkout') {
             steps {
                 // Get some code from a GitHub repository
-                git 'https://github.com/Frawatson/projCert.git'
+                git 'https://github.com/Frawatson/Edu_cert_proj.git'
             }
 		}
         stage('PHP Build') {
