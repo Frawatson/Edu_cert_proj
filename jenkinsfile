@@ -48,7 +48,7 @@ pipeline {
                 sh 'ansible-playbook -i inventory playbook.yml'
             }
 		}
-        stage('Deploy to Docker') {
+        stage('Deploy on docker swarm') {
             steps {
 			 sh 'docker-compose up -d'
             }
