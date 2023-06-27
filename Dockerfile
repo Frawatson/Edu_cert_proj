@@ -1,4 +1,4 @@
-FROM devopsedu/webapp
+FROM frawatson/edureka_cert
 
 COPY ./website/ /var/www/html
 
