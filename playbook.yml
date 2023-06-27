@@ -16,10 +16,10 @@
 
     - name: Start Docker Service
       docker_container:
-        name: edureka_cert_stack
+        name: frawatson/edureka_cert
         image: frawatson/edureka_cert
         ports:
           - "80:80"
         volumes:
-          - /path/to/app:/var/www/html
+          - appleco_vol:/var/www/html
         restart_policy: always
