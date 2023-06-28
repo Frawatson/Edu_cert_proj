@@ -28,7 +28,7 @@ pipeline {
 				sh 'docker version'
 				sh "docker build -t appleco:${BUILD_NUMBER} ."
 				sh 'docker image list'
-				sh "docker tag appleco:${BUILD_NUMBER} frawatson/edureka_cert:latest"
+				sh "docker tag appleco:${BUILD_NUMBER} frawatson/edureka_cert"
             }
         }
 		stage('Login2DockerHub') {
@@ -49,7 +49,7 @@ pipeline {
                 sh 'ansible-playbook -i /etc/ansible/hosts playbook.yml'
             }
 		}
-        stage('Deploy to Docker') {
+        stage('Deploy to web') {
             steps {
 			 sh 'docker-compose up -d'
             }
