@@ -41,7 +41,7 @@
         name: frawatson/edureka_cert
         source: pull
 
-    - name: Start Docker Service
+    - name: Run docker images
       docker_container:
         name: frawatson/edureka_cert
         image: frawatson/edureka_cert:latest
