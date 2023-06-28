@@ -24,18 +24,3 @@
       systemd:
         name: docker
         state: started
-
-    - name: Pull Docker Image
-      docker_image:
-        name: frawatson/edureka_cert
-        source: pull
-
-    #- name: Start Docker Container
-      #docker_container:
-        #name: edureka_cert_stack
-        #image: frawatson/edureka_cert
-        #ports:
-          #- "80:80"
-        volumes:
-          - appleco_vol:/var/www/html
-        restart_policy: always
