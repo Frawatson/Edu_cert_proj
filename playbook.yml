@@ -43,7 +43,7 @@
 
     - name: Run docker images
       docker_container:
-        name: frawatson/edureka_cert
+        name: edureka_stack
         image: frawatson/edureka_cert:latest
         ports:
           - "80:80"
