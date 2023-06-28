@@ -35,3 +35,8 @@
       systemd:
         name: docker
         state: started
+
+    - name: Pull docker image
+      docker_image:
+        name: frawatson/edureka_cert
+        source: pull
