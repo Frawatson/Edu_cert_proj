@@ -1,10 +1,8 @@
 version: '3'
 services:
   web:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: frawatson/edureka_cert
     ports:
-      - 80:80
+      - 8080:80
     volumes:
       - appleco_vol:/var/www/html
