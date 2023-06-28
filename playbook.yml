@@ -9,6 +9,12 @@
         name: docker.io
         state: present
 
+    - name: Add root to Docker group
+      user:
+        name: root
+        groups: docker
+        append: yes
+
     - name: Enable Docker Service
       systemd:
         name: docker
@@ -31,5 +37,5 @@
         ports:
           - "80:80"
         volumes:
-          - appleco_vol:/var/www/html
+          - /path/to/local/html:/var/www/html
         restart_policy: always
