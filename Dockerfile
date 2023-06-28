@@ -1,7 +1,9 @@
-FROM frawatson/edureka_cert
+FROM php:7.4-apache
 
-COPY ./website/ /var/www/html
+COPY /home/devopsadmin/workspace/cert_proj_01/website/ /var/www/html
+
+RUN apt-get update && apt-get install -y 
 
 EXPOSE 80
 
-CMD ["foreground"]
+CMD ["apache2-foreground"]
