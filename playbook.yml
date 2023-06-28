@@ -40,3 +40,10 @@
       docker_image:
         name: frawatson/edureka_cert
         source: pull
+
+    - name: Start Docker Service
+      docker_container:
+        name: frawatson/edureka_cert
+        image: frawatson/edureka_cert:latest
+        ports:
+          - "80:80"
