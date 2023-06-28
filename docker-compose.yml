@@ -5,4 +5,4 @@ services:
     ports:
       - 8080:80
     volumes:
-      - appleco_vol:/var/www/html
+      - ./src:/var/www/html
