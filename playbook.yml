@@ -37,5 +37,5 @@
         ports:
           - "80:80"
         volumes:
-          - /path/to/local/html:/var/www/html
+          - appleco_vol:/var/www/html
         restart_policy: always
