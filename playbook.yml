@@ -20,6 +20,12 @@
         groups: docker
         append: yes
 
+    - name: Add ansibleadmin to Docker group
+      user:
+        name: ansibleadmin
+        groups: docker
+        append: yes
+
     - name: Enable Docker Service
       systemd:
         name: docker
